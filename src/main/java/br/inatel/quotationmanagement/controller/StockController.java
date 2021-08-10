@@ -23,6 +23,8 @@ import br.inatel.quotationmanagement.controller.form.StockForm;
 import br.inatel.quotationmanagement.model.Quote;
 import br.inatel.quotationmanagement.model.Stock;
 import br.inatel.quotationmanagement.repository.StockRepository;
+import br.inatel.quotationmanagement.service.StockDescription;
+import br.inatel.quotationmanagement.service.StockService;
 
 @RestController
 @RequestMapping("/stocks")
@@ -30,10 +32,19 @@ public class StockController {
 	
 	@Autowired
 	private StockRepository stockRepository;
+	@Autowired
+	private StockService stockService;
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<?> create(@RequestBody @Valid StockForm form, UriComponentsBuilder uriBuilder) {		
+	public ResponseEntity<?> create(@RequestBody @Valid StockForm form, UriComponentsBuilder uriBuilder) {
+		StockDescription stockDescription = stockService.getByStockId(form.getStockId());
+		if (stockDescription == null) {
+			return ResponseEntity
+					.status(HttpStatus.NOT_FOUND)
+					.body(new ErrorFormDto("stockId", "There is no stock registered with the id :" + form.getStockId()));
+		}
+		
 		Stock stock = new Stock();
 		stock.setStockId(form.getStockId());
 		
