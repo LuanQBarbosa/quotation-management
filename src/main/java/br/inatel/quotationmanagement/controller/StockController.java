@@ -59,4 +59,17 @@ public class StockController {
 		return ResponseEntity.ok(StockDto.convertToList(stockList));
 	}
 	
+	@GetMapping()
+	public ResponseEntity<?> list() {
+		List<Stock> stockList = stockRepository.findAll();
+		
+		if(stockList.isEmpty()) {
+			return ResponseEntity
+					.status(HttpStatus.NOT_FOUND)
+					.body(new ErrorFormDto("", "No stocks registered on database yet"));
+		}
+		
+		return ResponseEntity.ok(StockDto.convertToList(stockList));
+	}
+	
 }
