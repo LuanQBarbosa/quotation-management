@@ -1,7 +1,9 @@
 package br.inatel.quotationmanagement.controller.dto;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import br.inatel.quotationmanagement.model.Quote;
 import br.inatel.quotationmanagement.model.Stock;
@@ -17,7 +19,7 @@ public class StockDto {
 		this.stockId = stock.getStockId();
 		
 		for (Quote quote : stock.getQuotes()) {
-			this.quotes.put(quote.getId().toString(), quote.getDate().toString());
+			this.quotes.put(quote.getDate().toString(), quote.getValue().toString());
 		}
 	}
 
@@ -31,6 +33,10 @@ public class StockDto {
 
 	public Map<String, String> getQuotes() {
 		return quotes;
+	}
+	
+	public static List<StockDto> convertToList(List<Stock> stocks) {
+		return stocks.stream().map(StockDto::new).collect(Collectors.toList());
 	}
 
 }
