@@ -19,7 +19,7 @@ public class Quote {
 	private LocalDate date;
 	
 	@ManyToOne
-	private Stock stock;
+	private Operation operation;
 	
 	@Override
 	public int hashCode() {
@@ -70,12 +70,12 @@ public class Quote {
 		this.date = date;
 	}
 
-	public Stock getStock() {
-		return stock;
+	public Operation getOperation() {
+		return operation;
 	}
 
-	public void setStock(Stock stock) {
-		this.stock = stock;
+	public void setStock(Operation operation) {
+		this.operation = operation;
 	}
 
 }

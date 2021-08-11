@@ -1,13 +1,13 @@
 package br.inatel.quotationmanagement.service;
 
-public class StockDescription {
+public class Stock {
 
 	private String id;
 	private String description;
 	
-	public StockDescription() {}
+	public Stock() {}
 	
-	public StockDescription(String id, String description) {
+	public Stock(String id, String description) {
 		this.id = id;
 		this.description = description;
 	}

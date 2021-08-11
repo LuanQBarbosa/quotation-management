@@ -26,17 +26,14 @@ public class StockService {
 		this.stockManagerURL = stockManagerURL;
 	}
 	
-	@Cacheable(value = "stockById")
-	public StockDescription getByStockId(String stockId) {
-		return restTemplate.getForObject(stockManagerURL + "/stock/" + stockId, StockDescription.class);
-	}
-	
-	@Cacheable(value = "allStocks")
-	public List<StockDescription> getAll() {
-		StockDescription[] stockList = restTemplate.getForObject(stockManagerURL + "/stock", StockDescription[].class);
+	@Cacheable(value = "stocks")
+	public List<Stock> getStockList() {
+		System.out.println("GOT ALL STOCKS FROM API");
+		Stock[] stockList = restTemplate.getForObject(stockManagerURL + "/stock", Stock[].class);
 		return Arrays.asList(stockList);
 	}
 	
+	// @EventListener(ContextRefreshedEvent.class)
 	@EventListener(ApplicationReadyEvent.class)
 	public void register() {
 		System.out.println("***** REGISTERED ******");

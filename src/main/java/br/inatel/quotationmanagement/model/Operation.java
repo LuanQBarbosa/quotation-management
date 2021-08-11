@@ -2,24 +2,26 @@ package br.inatel.quotationmanagement.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Stock {
+public class Operation {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private String id;
 	private String stockId;
 	
-	@OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "operation", cascade = CascadeType.ALL)
 	private List<Quote> quotes = new ArrayList<>();
+	
+	public Operation() {
+		this.id = UUID.randomUUID().toString();
+	}
 	
 	@Override
 	public int hashCode() {
@@ -37,7 +39,7 @@ public class Stock {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Stock other = (Stock) obj;
+		Operation other = (Operation) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -46,11 +48,11 @@ public class Stock {
 		return true;
 	}
 	
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

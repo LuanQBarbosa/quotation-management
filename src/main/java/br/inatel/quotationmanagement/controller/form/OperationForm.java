@@ -9,10 +9,10 @@ import java.util.Map;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import br.inatel.quotationmanagement.model.Operation;
 import br.inatel.quotationmanagement.model.Quote;
-import br.inatel.quotationmanagement.model.Stock;
 
-public class StockForm {
+public class OperationForm {
 	
 	@NotNull
 	@NotEmpty
@@ -30,18 +30,43 @@ public class StockForm {
 		return quotes;
 	}
 	
-	public List<Quote> generateQuoteList(Stock stock) {
+	public List<Quote> generateQuoteList(Operation operation) {
 		List<Quote> quotes = new ArrayList<>();
+		
 		for (Map.Entry<String, String> quoteEntry : this.quotes.entrySet()) {
 			Quote quote = new Quote();
 			quote.setDate(LocalDate.parse(quoteEntry.getKey()));
 			quote.setValue(new BigDecimal(quoteEntry.getValue()));
-			quote.setStock(stock);
+			quote.setStock(operation);
 			
 			quotes.add(quote);
 		}
 		
 		return quotes;
+	}
+	
+	public boolean isQuotesDatesValid() {
+		for (Map.Entry<String, String> quoteEntry : this.quotes.entrySet()) {
+			String date = quoteEntry.getKey();
+			
+			if (date.isEmpty() || !date.matches("^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$")) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	public boolean isQuotesValuesValid() {
+		for (Map.Entry<String, String> quoteEntry : this.quotes.entrySet()) {
+			String value = quoteEntry.getValue();
+			
+			if (value.isEmpty() || !value.matches("^[0-9]*([\\\\.,]{1}[0-9]{0,2}){0,1}$")) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 }

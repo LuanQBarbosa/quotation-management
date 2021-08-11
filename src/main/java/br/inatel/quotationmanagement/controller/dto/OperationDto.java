@@ -5,25 +5,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import br.inatel.quotationmanagement.model.Operation;
 import br.inatel.quotationmanagement.model.Quote;
-import br.inatel.quotationmanagement.model.Stock;
 
-public class StockDto {
+public class OperationDto {
 	
-	private Long id;
+	private String id;
 	private String stockId;
 	private Map<String, String> quotes = new HashMap<>();
 	
-	public StockDto(Stock stock) {
-		this.id = stock.getId();
-		this.stockId = stock.getStockId();
+	public OperationDto(Operation operation) {
+		this.id = operation.getId();
+		this.stockId = operation.getStockId();
 		
-		for (Quote quote : stock.getQuotes()) {
+		for (Quote quote : operation.getQuotes()) {
 			this.quotes.put(quote.getDate().toString(), quote.getValue().toString());
 		}
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -35,8 +35,8 @@ public class StockDto {
 		return quotes;
 	}
 	
-	public static List<StockDto> convertToList(List<Stock> stocks) {
-		return stocks.stream().map(StockDto::new).collect(Collectors.toList());
+	public static List<OperationDto> convertToList(List<Operation> operations) {
+		return operations.stream().map(OperationDto::new).collect(Collectors.toList());
 	}
 
 }
