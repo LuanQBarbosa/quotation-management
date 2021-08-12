@@ -32,7 +32,7 @@ import br.inatel.quotationmanagement.service.StockService;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/quotes")
+@RequestMapping("/quote")
 @Slf4j
 public class QuoteController {
 	

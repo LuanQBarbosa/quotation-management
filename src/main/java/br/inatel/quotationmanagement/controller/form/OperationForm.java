@@ -37,7 +37,7 @@ public class OperationForm {
 			Quote quote = new Quote();
 			quote.setDate(LocalDate.parse(quoteEntry.getKey()));
 			quote.setValue(new BigDecimal(quoteEntry.getValue()));
-			quote.setStock(operation);
+			quote.setOperation(operation);
 			
 			quotes.add(quote);
 		}

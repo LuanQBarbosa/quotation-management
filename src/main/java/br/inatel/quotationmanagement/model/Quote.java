@@ -74,7 +74,7 @@ public class Quote {
 		return operation;
 	}
 
-	public void setStock(Operation operation) {
+	public void setOperation(Operation operation) {
 		this.operation = operation;
 	}
 
