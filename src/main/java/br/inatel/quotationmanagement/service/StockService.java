@@ -15,7 +15,10 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class StockService {
 
 	private RestTemplate restTemplate = new RestTemplate();
@@ -28,15 +31,16 @@ public class StockService {
 	
 	@Cacheable(value = "stocks")
 	public List<Stock> getStockList() {
-		System.out.println("GOT ALL STOCKS FROM API");
+		log.info("Getting Stocks List from Stock Manager API");
 		Stock[] stockList = restTemplate.getForObject(stockManagerURL + "/stock", Stock[].class);
+		log.info("Stocks List successfully fetched from Stock Manager API");
 		return Arrays.asList(stockList);
 	}
 	
 	// @EventListener(ContextRefreshedEvent.class)
 	@EventListener(ApplicationReadyEvent.class)
 	public void register() {
-		System.out.println("***** REGISTERED ******");
+		log.info("Registering Quotation Manager on Stock Manager API");
 		HttpHeaders header = new HttpHeaders();
 		header.setContentType(MediaType.APPLICATION_JSON);
 		
@@ -47,6 +51,7 @@ public class StockService {
 		HttpEntity<String> request = new HttpEntity<String>(body.toString(), header);
 
 		restTemplate.postForObject(stockManagerURL + "/notification", request, String.class);
+		log.info("Quotation Manager successfully registered on Stock Manager API");
 	}
 	
 }

@@ -6,7 +6,6 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 @SpringBootApplication
-@EnableSpringDataWebSupport
 @EnableCaching
 public class QuotationManagementApplication {
 
