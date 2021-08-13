@@ -45,9 +45,9 @@ public class QuoteControllerTest {
 		Mockito.when(stockService.getStockList()).thenReturn(stockList);
 		
 		JSONObject quotes = new JSONObject();
-		quotes.put("2022-08-01", "10");
-		quotes.put("2022-08-02", "14");
-		quotes.put("2022-08-03", "11");
+		quotes.put("2009-08-01", "10");
+		quotes.put("2009-08-02", "14");
+		quotes.put("2009-08-03", "11");
 
 		JSONObject body = new JSONObject();
 		body.put("stockId", "petr4");
