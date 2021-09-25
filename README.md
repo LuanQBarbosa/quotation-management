@@ -1,5 +1,5 @@
 <h4 align="center"> 
-	✅ Quotation Management API - Done ✅
+	✅ Stock Quotation Management API - Done ✅
 </h4>
 
 ---
