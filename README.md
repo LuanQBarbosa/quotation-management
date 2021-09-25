@@ -26,7 +26,7 @@
 ## 🚀 Setup
 
 1. Download [Java Eclipse IDE](https://www.eclipse.org/downloads/)
-2. Clone this repository: ``git clone https://github.com/VanessaSwerts/quotation-management.git``
+2. Clone this repository: ``git clone https://github.com/LuanQBarbosa/stock-quotation-management/``
 3. Open the app on Eclipse IDE
 5. Run the project and access http://localhost:8081
 
